@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript Quiz</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./assets/css/style.css">
+  </head> 
+
+  <body>
+    <header>
+      <div id="high-score">View Highscores</div>
+    </header>   
+    <section id="show-timer">
+      <div class="timer" style="margin-top: 20px;">Time Left:</div>
+      <div class="timer-left">60</div>
+    </section> 
+    <section>
+      <div class="Instructions">
+        <h1 id="title">Coding Quiz Challenge</h1>
+        <h4 class = "quiz-instructions">You will have 60 seconds to complete 4 multiple choice questions. If you get the question wrong 10 seconds will be deducted from your time. Try to get the high score </h4>
+        <button class="start-button" style="margin-bottom: 16px;">Start Quiz</button>
+      </div>
+    </section>
+    
+    <section id ="question1">
+      <div> How do you access the first element of an array named "myQuiz" in JavaScript?</div>
+        <ul>
+          <li><button>a. myQuiz[0]</button></li>  <!--a is correct -->
+          <li><button>b. myQuiz.first()</button></li>
+          <li><button>c. myQuiz.first</button></li>
+          <li><button>d. myQuiz[1]</button></li>
+        </ul>
+    </section>
+
+    <section id ="question2">
+      <div> Which array method is used to remove the last element from an array in JavaScript?</div>
+        <ul>
+          <li><button>a. pop()</button></li>  <!--a is correct -->
+          <li><button>b. remove()</button></li>
+          <li><button>c. delete()</button></li>
+          <li><button>d. last()</button></li>
+        </ul>
+    </section>
+
+    <section id ="question3">
+      <div> Which of the following is the correct way to write a comment in JavaScript?</div>
+        <ul>  
+          <li><button>a. !-- This is a comment -></button></li>  
+          <li><button>b. // This is a comment</button></li>  <!--b is correct -->
+          <li><button>c. /* This is a comment */</button></li>
+          <li><button>d. ** This is a comment **</button></li>
+        </ul>    
+    </section>
+
+    <section id ="question4">
+      <div> What function is used to add an HTML element to the end of the DOM using JavaScript?</div>
+        <ul>  
+          <li><button>a. insert()</button></li>  
+          <li><button>b. add()</button></li>
+          <li><button>c. append()</button></li> <!--c is correct -->
+          <li><button>d. addToEnd()</button></li>
+        </ul>
+    </section>
+
+    <div id = "correct">Correct</div>
+    <div id = "incorrect">Incorrect</div>
+
+    <input id='initials' type='text'>
+    <button id ='submit'>submit</button>
+
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

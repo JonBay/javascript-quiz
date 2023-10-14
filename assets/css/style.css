@@ -1,0 +1,91 @@
+ul {
+  list-style-type: none;
+}
+
+#high-score {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: firebrick;
+}
+
+#show-timer {
+  font-size: 19 px;
+  display: none;
+}
+
+#title {
+  color:rgb(8, 212, 202)
+}
+
+.Instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#question1 {
+  display: none;
+}
+
+#question2 {
+  display: none;
+}
+
+#question3 {
+  display: none;
+}
+
+#question4 {
+  display: none;
+}
+
+#correct {
+  display: none;
+}
+
+#incorrect {
+  display: none;
+}
+
+#initials {
+  display: none;
+}
+
+#submit {
+  display: none;
+}
+
+
+
+/*  @media screen and (max-width: 1183px) {
+    main {
+      flex-direction: column;
+    }
+  
+    .word-guess,
+    .results {
+      width: 90vw;
+    }
+  
+    section {
+      background-color: white;
+      margin: 20px auto;
+      width: 92vw;
+    }
+  }
+  
+  @media screen and (max-width: 504px) {
+    .large-font {
+      font-size: 2em;
+    }
+  
+    .reset-button {
+      font-size: 12px;
+      width: 20ox;
+      
+    }
+  
+    .timer {
+      height: 200px;
+    }
