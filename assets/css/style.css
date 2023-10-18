@@ -42,10 +42,14 @@ ul {
 
 #correct {
   display: none;
+  font-size: 22px;
+  font-style: bold; 
 }
 
 #incorrect {
   display: none;
+  font-size: 22px;
+  font-style: bold; 
 }
 
 #initials {
@@ -54,6 +58,21 @@ ul {
 
 #submit {
   display: none;
+}
+
+ul li button {
+  background-color: #4caf50; 
+  color: white; 
+  font-size: 16px; 
+  padding: 10px 20px;
+  border: none; /* Remove the default button border */
+  border-radius: 5px; 
+  margin: 5px; 
+  cursor: pointer; 
+}
+
+ul li button:hover {
+  background-color: #2ea1be; /* Change the background color on hover */
 }
 
 

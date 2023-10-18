@@ -1,19 +1,17 @@
 var startButton = document.querySelector(".start-button");
-//var showQuestion = false; // right now I don't know if I'll need this, or maybe define it differently.
 var timerCount;
 var timer;
 var timerElement = document.querySelector(".timer-left");
+var selectedOption; 
+
 
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
 
-var numBlanks = 0;
-var winCounter = 0;
-var loseCounter = 0;
+
 
 // startQuiz is called when the start button is clicked
 function startQuiz() {
-  //showQuestion = true;
   timerCount = 60;
   startTimer();
   firstQuestion();
@@ -23,29 +21,26 @@ function startQuiz() {
 // I borrowed this function from the mini project we did and tweaked it to work.
 function startTimer() {
   // Sets timer
-  timer = setInterval(
-    function () {
-      timerCount--;
-      timerElement.textContent = timerCount;
-      console.log(timerElement);
-      // if (timerCount >= 0)
-      //     {
-      //         // Tests if win condition is met
-      //         if (isWin && timerCount > 0) {
-      // Clears interval and stops timer
-      //         clearInterval(timer);
-      //         winGame();
-      //     }
-    },
+  timer = setInterval(function () {
+    timerCount--;
+    timerElement.textContent = timerCount;
+    console.log(timerElement);
+
+    if (timerCount >= 0) {
+      // Tests if win condition is met
+      if (isWin && timerCount > 0) {
+        // Clears interval and stops timer
+        clearInterval(timer);
+        winGame();
+      }
+    }
     // Tests if time has run out
-    //if (timerCount === 0)
-    //    {
-    // Clears interval
-    //        clearInterval(timer);
-    //loseGame();
-    //    }
-    1000
-  );
+    if (timerCount === 0) {
+      // Clears interval
+      clearInterval(timer);
+      loseGame();
+    }
+  }, 1000);
 }
 
 function firstQuestion() {
@@ -56,12 +51,6 @@ function firstQuestion() {
 }
 
 
-
-// Attach event listener to start button to call startGame function on click
-startButton.addEventListener("click", startQuiz);
-
-////////////////////////////////////////////////////////
-
 function showQuestion(questionNumber) {
   // Hide all questions
   for (let i = 1; i <= 4; i++) {
@@ -70,78 +59,100 @@ function showQuestion(questionNumber) {
 
   // Show the specified question
   document.getElementById(`question${questionNumber}`).style.display = "block";
-  document.getElementById(`question${questionNumber}`).style.textAlign =
-    "center";
+  document.getElementById(`question${questionNumber}`).style.textAlign = "center";
 
   // Clear any previous correct/incorrect messages
   document.getElementById("correct").style.display = "none";
   document.getElementById("incorrect").style.display = "none";
+
+  attachEventListeners(questionNumber);
 }
 
-function checkAnswer(questionNumber, selectedOption) {
-  const correctOption = "a";
 
-  if (selectedOption === correctOption) {
-    document.getElementById("correct").style.display = "block";
-  } else {
-    document.getElementById("incorrect").style.display = "block";
-    timerCount -= 10; // Deduct 10 seconds for incorrect answer
-    timerElement.textContent = timerCount; // Update timer display
-  }
+function attachEventListeners(questionNumber) {
+  document.getElementById(`question${questionNumber}`).querySelectorAll("button")
+    .forEach(function (button) {
+      button.addEventListener("click", function () {
+        const isCorrect = button.getAttribute("data-correct") === "true";
 
-  // Move to the next question after a brief delay (you can adjust the delay as needed)
-  setTimeout(function () {
-    showQuestion(questionNumber + 1);
-  }, 1000); // Delay of 1 second before showing next question
-}
-
-// Attach event listeners to answer buttons
-document
-  .getElementById("question1")
-  .querySelectorAll("button")
-  .forEach(function (button) {
-    button.addEventListener("click", function () {
-      checkAnswer(1, button.textContent.trim().toLowerCase());
+        if (questionNumber === 1) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000);  
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000); 
+          }
+        } else if (questionNumber === 2) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000); 
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000); 
+          }
+        } else if (questionNumber === 3) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000); 
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000); 
+          }
+        } else if (questionNumber === 4) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);
+            }, 1000); 
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber ++; 
+              showQuestion(questionNumber);  // instead of showquestion here need function to end game
+            }, 1000); 
+          }
+        }
+      });
     });
-  });
+}
 
-// Repeat the above block for question 2, question 3, and question 4
+startButton.addEventListener("click", startQuiz);
 
-// document
-//   .getElementById("question1")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       document.getElementById("question1").style.display = "none";
-//       document.getElementById("question2").style.display = "block";
-//     });
-//   });
 
-// document
-//   .getElementById("question2")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       document.getElementById("question2").style.display = "none";
-//       document.getElementById("question3").style.display = "block";
-//     });
-//   });
 
-// document
-//   .getElementById("question3")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       document.getElementById("question3").style.display = "none";
-//       document.getElementById("question4").style.display = "block";
-//     });
-//   });
-
-// document
-//   .getElementById("question4")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       // Continue with what happens after the last question
-//     });
-//   });
