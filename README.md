@@ -15,7 +15,7 @@
   - [Questions](#questions)
 
   ## Installation
-  Project can be viewed at link. com or code can be cloned and you can view the index.html using a browser.   
+  Project can be viewed at https://jonbay.github.io/javascript-quiz/. com or code can be cloned and you can view the index.html using a browser.   
 
   ## Usage
   To test your knowledge of JavaScript.
