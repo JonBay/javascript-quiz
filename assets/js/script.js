@@ -1,51 +1,32 @@
 var startButton = document.querySelector(".start-button");
-//var showQuestion = false; // right now I don't know if I'll need this, or maybe define it differently.
 var timerCount;
 var timer;
 var timerElement = document.querySelector(".timer-left");
-
-var win = document.querySelector(".win");
-var lose = document.querySelector(".lose");
-
-var numBlanks = 0;
-var winCounter = 0;
-var loseCounter = 0;
+var selectedOption;
+var numberCorrect = 0;
+var userInitials;
 
 // startQuiz is called when the start button is clicked
 function startQuiz() {
-  //showQuestion = true;
   timerCount = 60;
   startTimer();
   firstQuestion();
 }
 
-// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
-// I borrowed this function from the mini project we did and tweaked it to work.
 function startTimer() {
   // Sets timer
-  timer = setInterval(
-    function () {
-      timerCount--;
-      timerElement.textContent = timerCount;
-      console.log(timerElement);
-      // if (timerCount >= 0)
-      //     {
-      //         // Tests if win condition is met
-      //         if (isWin && timerCount > 0) {
-      // Clears interval and stops timer
-      //         clearInterval(timer);
-      //         winGame();
-      //     }
-    },
+  timer = setInterval(function () {
+    timerCount--;
+    timerElement.textContent = timerCount;
+    console.log(timerElement);
+
     // Tests if time has run out
-    //if (timerCount === 0)
-    //    {
-    // Clears interval
-    //        clearInterval(timer);
-    //loseGame();
-    //    }
-    1000
-  );
+    if (timerCount === 0) {
+      // Clears interval
+      clearInterval(timer);
+      outOfTime();
+    }
+  }, 1000);
 }
 
 function firstQuestion() {
@@ -54,13 +35,6 @@ function firstQuestion() {
   document.querySelector(".start-button").style.display = "none";
   showQuestion(1); // Show the first question
 }
-
-
-
-// Attach event listener to start button to call startGame function on click
-startButton.addEventListener("click", startQuiz);
-
-////////////////////////////////////////////////////////
 
 function showQuestion(questionNumber) {
   // Hide all questions
@@ -76,72 +50,165 @@ function showQuestion(questionNumber) {
   // Clear any previous correct/incorrect messages
   document.getElementById("correct").style.display = "none";
   document.getElementById("incorrect").style.display = "none";
+
+  attachEventListeners(questionNumber);
 }
 
-function checkAnswer(questionNumber, selectedOption) {
-  const correctOption = "a";
+function attachEventListeners(questionNumber) {
+  document
+    .getElementById(`question${questionNumber}`)
+    .querySelectorAll("button")
+    .forEach(function (button) {
+      button.addEventListener("click", function () {
+        const isCorrect = button.getAttribute("data-correct") === "true";
 
-  if (selectedOption === correctOption) {
-    document.getElementById("correct").style.display = "block";
-  } else {
-    document.getElementById("incorrect").style.display = "block";
-    timerCount -= 10; // Deduct 10 seconds for incorrect answer
-    timerElement.textContent = timerCount; // Update timer display
-  }
-
-  // Move to the next question after a brief delay (you can adjust the delay as needed)
-  setTimeout(function () {
-    showQuestion(questionNumber + 1);
-  }, 1000); // Delay of 1 second before showing next question
-}
-
-// Attach event listeners to answer buttons
-document
-  .getElementById("question1")
-  .querySelectorAll("button")
-  .forEach(function (button) {
-    button.addEventListener("click", function () {
-      checkAnswer(1, button.textContent.trim().toLowerCase());
+        if (questionNumber === 1) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber++;
+              numberCorrect++;
+              showQuestion(questionNumber);
+            }, 1000);
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber++;
+              showQuestion(questionNumber);
+            }, 1000);
+          }
+        } else if (questionNumber === 2) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber++;
+              numberCorrect++;
+              showQuestion(questionNumber);
+            }, 1000);
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber++;
+              showQuestion(questionNumber);
+            }, 1000);
+          }
+        } else if (questionNumber === 3) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber++;
+              numberCorrect++;
+              showQuestion(questionNumber);
+            }, 1000);
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber++;
+              showQuestion(questionNumber);
+            }, 1000);
+          }
+        } else if (questionNumber === 4) {
+          if (isCorrect) {
+            document.getElementById("correct").style.display = "block";
+            document.getElementById("correct").style.textAlign = "center";
+            setTimeout(function () {
+              questionNumber++;
+              numberCorrect++;
+              endQuiz();
+            }, 1000);
+          } else {
+            document.getElementById("incorrect").style.display = "block";
+            document.getElementById("incorrect").style.textAlign = "center";
+            timerCount -= 10; // Deduct 10 seconds for incorrect answer
+            timerElement.textContent = timerCount; // Update timer display
+            setTimeout(function () {
+              questionNumber++;
+              endQuiz();
+            }, 1000);
+          }
+        }
+      });
     });
+}
+
+function endQuiz() {
+  document.getElementById(`question4`).style.display = "none";
+  document.getElementById("correct").style.display = "none";
+  document.getElementById("incorrect").style.display = "none";
+  document.getElementById("quiz-over").style.display = "block";
+  document.getElementById("quiz-over").style.textAlign = "center";
+  document.getElementById("number-correct").style.display = "block";
+  document.getElementById("number-correct").style.textAlign = "center";
+  document.getElementById("number-correct").textContent = `You got ${numberCorrect} correct! `;
+  clearInterval(timer);
+  const timeTaken = 60 - timerCount; // Calculate time taken
+  document.getElementById("store-score").style.display = "block";
+  document.getElementById("store-score").style.textAlign = "center";
+  document.getElementById("initials").style.display = "block";
+  document.getElementById("initials").style.margin = "auto";
+  document.getElementById("submit").style.display = "block";
+  document.getElementById("submit").style.margin = "auto";
+  document.getElementById("submit").addEventListener("click", function () {
+    userInitials = document.getElementById("initials").value;
+    storeUserData(timeTaken, numberCorrect, userInitials);
+    window.location.href = "highScores.html"; 
   });
+}
 
-// Repeat the above block for question 2, question 3, and question 4
+function storeUserData(timeTaken, numberCorrect, userInitials) {
+  const userData = {
+    time: timeTaken,
+    correctAnswers: numberCorrect,
+    initials: userInitials,
+  };
 
-// document
-//   .getElementById("question1")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       document.getElementById("question1").style.display = "none";
-//       document.getElementById("question2").style.display = "block";
-//     });
-//   });
+  const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+  highScores.push(userData);
 
-// document
-//   .getElementById("question2")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       document.getElementById("question2").style.display = "none";
-//       document.getElementById("question3").style.display = "block";
-//     });
-//   });
+  // Sort the high scores
+  highScores.sort((a, b) => a.time - b.time); //had internet help for this sort
 
-// document
-//   .getElementById("question3")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       document.getElementById("question3").style.display = "none";
-//       document.getElementById("question4").style.display = "block";
-//     });
-//   });
+  // Store the high scores back to localStorage
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+}
 
-// document
-//   .getElementById("question4")
-//   .querySelectorAll("button")
-//   .forEach(function (button) {
-//     button.addEventListener("click", function () {
-//       // Continue with what happens after the last question
-//     });
-//   });
+function outOfTime() {
+  clearInterval(timer);
+  if (confirm("Out of Time. Would you like to try Again?")); {
+    resetQuiz();
+  }
+}
+
+function resetQuiz() {
+  timerCount = 60;
+  numberCorrect = 0;
+  timerElement.textContent = timerCount;
+
+  document.getElementById("question1").style.display = "none";
+  document.getElementById("question2").style.display = "none";
+  document.getElementById("question3").style.display = "none";
+  document.getElementById("question4").style.display = "none";
+  document.getElementById("show-timer").style.display = "none";
+  document.querySelector(".quiz-instructions").style.display = "block";
+  document.querySelector(".start-button").style.display = "block";
+  document.getElementById("quiz-over").style.display = "none";
+  document.getElementById("number-correct").style.display = "none";
+  document.getElementById("store-score").style.display = "none";
+  document.getElementById("initials").style.display = "none";
+  document.getElementById("submit").style.display = "none";
+  startButton.addEventListener("click", startQuiz);
+}
+
+startButton.addEventListener("click", startQuiz);

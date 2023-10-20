@@ -42,9 +42,17 @@ ul {
 
 #correct {
   display: none;
+  font-size: 22px;
+  font-style: bold; 
 }
 
 #incorrect {
+  display: none;
+  font-size: 22px;
+  font-style: bold; 
+}
+
+#number-correct {
   display: none;
 }
 
@@ -52,40 +60,34 @@ ul {
   display: none;
 }
 
+#quiz-over {
+  display: none;
+}
+
+#store-score {
+  display: none;
+}
+
 #submit {
   display: none;
 }
 
+#restart {
+  display: none;
+}
 
+ul li button {
+  background-color: #4caf50; 
+  color: white; 
+  font-size: 16px; 
+  padding: 10px 20px;
+  border: none; /* Remove the default button border */
+  border-radius: 5px; 
+  margin: 5px; 
+  cursor: pointer; 
+}
 
-/*  @media screen and (max-width: 1183px) {
-    main {
-      flex-direction: column;
-    }
-  
-    .word-guess,
-    .results {
-      width: 90vw;
-    }
-  
-    section {
-      background-color: white;
-      margin: 20px auto;
-      width: 92vw;
-    }
-  }
-  
-  @media screen and (max-width: 504px) {
-    .large-font {
-      font-size: 2em;
-    }
-  
-    .reset-button {
-      font-size: 12px;
-      width: 20ox;
-      
-    }
-  
-    .timer {
-      height: 200px;
-    }
+ul li button:hover {
+  background-color: #2ea1be; /* Change the background color on hover */
+}
+
