@@ -72,6 +72,10 @@ ul {
   display: none;
 }
 
+#restart {
+  display: none;
+}
+
 ul li button {
   background-color: #4caf50; 
   color: white; 

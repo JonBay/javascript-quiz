@@ -4,6 +4,7 @@ var timer;
 var timerElement = document.querySelector(".timer-left");
 var selectedOption;
 var numberCorrect = 0;
+var userInitials;
 
 // startQuiz is called when the start button is clicked
 function startQuiz() {
@@ -125,7 +126,7 @@ function attachEventListeners(questionNumber) {
             setTimeout(function () {
               questionNumber++;
               numberCorrect++;
-              endQuiz ();
+              endQuiz();
             }, 1000);
           } else {
             document.getElementById("incorrect").style.display = "block";
@@ -134,7 +135,7 @@ function attachEventListeners(questionNumber) {
             timerElement.textContent = timerCount; // Update timer display
             setTimeout(function () {
               questionNumber++;
-              endQuiz ();
+              endQuiz();
             }, 1000);
           }
         }
@@ -159,40 +160,55 @@ function endQuiz() {
   document.getElementById("initials").style.margin = "auto";
   document.getElementById("submit").style.display = "block";
   document.getElementById("submit").style.margin = "auto";
-  const userInitials = document.getElementById("initials").value;
-  storeUserData(timeTaken, numberCorrect, userInitials);
+  document.getElementById("submit").addEventListener("click", function () {
+    userInitials = document.getElementById("initials").value;
+    storeUserData(timeTaken, numberCorrect, userInitials);
+    window.location.href = "highScores.html"; 
+  });
 }
 
 function storeUserData(timeTaken, numberCorrect, userInitials) {
   const userData = {
     time: timeTaken,
     correctAnswers: numberCorrect,
-    initials: userInitials
+    initials: userInitials,
   };
 
   const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
   highScores.push(userData);
 
   // Sort the high scores
-  highScores.sort((a, b) => a.time - b.time);  //had internet help for this sort
+  highScores.sort((a, b) => a.time - b.time); //had internet help for this sort
 
   // Store the high scores back to localStorage
   localStorage.setItem("highScores", JSON.stringify(highScores));
 }
 
+function outOfTime() {
+  clearInterval(timer);
+  if (confirm("Out of Time. Would you like to try Again?")); {
+    resetQuiz();
+  }
+}
 
-// Make an outOfTime(); function.
+function resetQuiz() {
+  timerCount = 60;
+  numberCorrect = 0;
+  timerElement.textContent = timerCount;
+
+  document.getElementById("question1").style.display = "none";
+  document.getElementById("question2").style.display = "none";
+  document.getElementById("question3").style.display = "none";
+  document.getElementById("question4").style.display = "none";
+  document.getElementById("show-timer").style.display = "none";
+  document.querySelector(".quiz-instructions").style.display = "block";
+  document.querySelector(".start-button").style.display = "block";
+  document.getElementById("quiz-over").style.display = "none";
+  document.getElementById("number-correct").style.display = "none";
+  document.getElementById("store-score").style.display = "none";
+  document.getElementById("initials").style.display = "none";
+  document.getElementById("submit").style.display = "none";
+  startButton.addEventListener("click", startQuiz);
+}
 
 startButton.addEventListener("click", startQuiz);
-
-
-
-// to do's 
-// out of time function
-// event listener for submit button
-// New page to store high scores
-// retrieve high scores from local storage and display them 
-//link from first page to second page and back again 
-//readme
-//clean up code
-//submit
